@@ -27,12 +27,8 @@ int main(void) {
         ans1 = part1(ranges);
         ans2 = part2(ranges);
     }
-
-    for (int i = 0; i < ctr; i++) {
-        //printf("[%d] low=%s  high=%s\n", i, ranges[i][0], ranges[i][1]);
-    }
-
     printf("\nfinal answer part 1: %lld\n",ans1);
+    printf("\nfinal answer part 2: %lld\n",ans2);
 }
 
 void splitter(char *line){
@@ -48,7 +44,6 @@ long long int part1(char *ranges[][2]){
     for (int i = 0; i < ctr; i++) {
         long long int low = atoll(ranges[i][0]);
         long long int high = atoll(ranges[i][1]);
-        //printf("low %lld high %lld\n", low, high);
         for (long long j = low; j <= high; j++){ // cycle through all possible values
             int digits[1024];
             int k = 0;
@@ -72,7 +67,6 @@ long long int part1(char *ranges[][2]){
                 long long int current = atoll(current_str);
                 if (current == prev){ // is it repeating?
                     ans1 += j;
-                    //printf("%lld\n",ans1);
                 }
             }
         }
@@ -106,7 +100,6 @@ long long int part2(char *ranges[][2]){
                     pos++;
                 }
             }
-            //        printf("pos: %d k: %d\n", pos, k);
             
 
             // test if any of the possible repeat lengths give an invalid id
@@ -116,14 +109,12 @@ long long int part2(char *ranges[][2]){
                 sprintf(str, "%lld", j);
                 str[len_poss[a]] = '\0';
                 int prev = atoll(str);
-                //printf("m %d\n",m);
                 while (m*len_poss[a] <= k){ // for a given length checks if the id is invalid
                     sprintf(str, "%lld", j);
                     char current_str[2048];
                     strncpy(current_str, str + m*len_poss[a], len_poss[a]);
                     current_str[len_poss[a]] = '\0';
                     long long int current = atoll(current_str);
-                    //printf("prev %d current %d\n", prev, current);
 
                     if (current == prev){ // is it the same as last check?
                         prev = current;
@@ -133,10 +124,8 @@ long long int part2(char *ranges[][2]){
                         m = 1024;
                     }
                     if (m*len_poss[a] == k){
-                        //ans1 += j;
                         ans2list[ans2tracker] = j;
                         ans2tracker++;
-                        //printf("%lld", ans2list[ans2tracker-1]);
                     }
                     
                 }
